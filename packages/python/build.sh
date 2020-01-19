@@ -42,6 +42,9 @@ TERMUX_PKG_BREAKS="python2 (<= 2.7.15), python-dev"
 TERMUX_PKG_REPLACES="python-dev"
 
 termux_step_pre_configure() {
+	# -O3 gains some additional performance on at least aarch64.
+	CFLAGS="${CFLAGS/-Oz/-O3}"
+
 	# Needed when building with clang, as setup.py only probes
 	# gcc for include paths when finding headers for determining
 	# if extension modules should be built (specifically, the
